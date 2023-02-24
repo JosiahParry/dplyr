@@ -222,7 +222,10 @@ dplyr_reconstruct.rowwise_df <- function(data, template) {
   rowwise_df(data, group_vars)
 }
 
-dplyr_col_select <- function(.data, loc, error_call = caller_env()) {
+#' @export
+dplyr_col_select <- function(.data, .loc, ...) UseMethod("dplyr_col_select")
+#' @export
+dplyr_col_select.data.frame <- function(.data, loc, error_call = caller_env()) {
   loc <- vec_as_location(loc, n = ncol(.data), names = names(.data))
 
   out <- .data[loc]
